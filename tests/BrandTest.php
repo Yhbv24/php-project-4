@@ -161,5 +161,39 @@
             // Assert
             $this->assertEquals([$store], $result);
         }
+
+        function test_getStores()
+        {
+            // Arrange
+            $name = "Nike";
+            $new_brand = new Brand($name);
+            $new_brand->save();
+
+            $store_name = "Foot Locker";
+            $phone_number = "503-493-7148";
+            $street = "1022 Lloyd Center Space H-204";
+            $city = "Portland";
+            $state = "OR";
+            $zip = 97232;
+            $store = new Store($name, $phone_number, $street, $city, $state, $zip);
+            $store->save();
+
+            $store_name2 = "The Shoe Store";
+            $phone_number2 = "971-271-8926";
+            $street2 = "1603 NE Alberta St";
+            $city2 = "Portland";
+            $state2 = "OR";
+            $zip2 = 97211;
+            $store2 = new Store($name, $phone_number, $street, $city, $state, $zip);
+            $store2->save();
+
+            // Act
+            $new_brand->addStore($store);
+            $new_brand->addStore($store2);
+            $result = $new_brand->getStores();
+
+            // Assert
+            $this->assertEquals([$store, $store2], $result);
+        }
     }
 ?>
