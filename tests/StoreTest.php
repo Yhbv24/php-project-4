@@ -274,5 +274,58 @@
             // Assert
             $this->assertEquals([], $result);
         }
+
+        function test_addBrand($brand)
+        {
+            // Arrange
+            $name = "Foot Locker";
+            $phone_number = "503-493-7148";
+            $street = "1022 Lloyd Center Space H-204";
+            $city = "Portland";
+            $state = "OR";
+            $zip = 97232;
+            $new_store = new Store($name, $phone_number, $street, $city, $state, $zip);
+            $new_store->save();
+
+            $brand_name = "Nike";
+            $new_brand = new Brand($brand_name);
+            $new_brand->save();
+
+            // Act
+            $new_store->addBrand($new_brand);
+            $result = $new_store->getBrands();
+
+            // Assert
+            $this->assertEquals([$new_brand], $result);
+        }
+
+        function test_getBrands()
+        {
+            // Arrange
+            $name = "Foot Locker";
+            $phone_number = "503-493-7148";
+            $street = "1022 Lloyd Center Space H-204";
+            $city = "Portland";
+            $state = "OR";
+            $zip = 97232;
+            $new_store = new Store($name, $phone_number, $street, $city, $state, $zip);
+            $new_store->save();
+
+            $brand_name = "Nike";
+            $new_brand = new Brand($name);
+            $new_brand->save();
+
+            $brand_name2 = "Nike";
+            $new_brand2 = new Brand($brand_name2);
+            $new_brand2->save();
+
+            // Act
+            $new_store->addBrand($new_brand);
+            $new_store->addBrand($new_brand2);
+            $result = $new_store->getBrands();
+
+            // Assert
+            $this->assertEquals([$new_brand, $new_brand2], $result);
+        }
     }
 ?>
