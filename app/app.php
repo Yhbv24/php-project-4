@@ -11,6 +11,8 @@
     $password = "root";
     $DB = new PDO($server, $username, $password);
 
+     $app['debug'] = true;
+
     use Symfony\Component\HttpFoundation\Request;
     Request::enableHttpMethodParameterOverride();
 
@@ -25,6 +27,14 @@
         $stores = Store::getAll();
 
         return $app["twig"]->render("index.html.twig", array("brands" => $brands, "stores" => $stores));
+    });
+
+    $app->get("/view_store/{id}", function($id) use ($app) { // Route to the individual store information
+        $store = Store::find($id);
+        $brands = Brand::getAll();
+        $store_brands = $store->getBrands();
+
+        return $app["twig"]->render("view_store.html.twig", array("store" => $store, "brands" => $brands, "store_brands" => $store_brands));
     });
 
     // ***** Post routes *****
@@ -42,12 +52,20 @@
         return $app->redirect("/");
     });
 
-    $app->post("/add_brand", function() use ($app) { // Add a brand
+    $app->post("/add_brand", function() use ($app) { // Add a brand to table
         $name = filter_var($_POST["brand_name"], FILTER_SANITIZE_MAGIC_QUOTES);
         $brand = new Brand($name);
         $brand->save();
 
         return $app->redirect("/");
+    });
+
+    $app->post("/view_store/{id}", function($id) use ($app) {
+        $store = Store::find($id);
+        $brand_id = $_POST["brand_id"];
+        $store->addBrand($brand_id);
+
+        return $app->redirect("/view_store/" . $id);
     });
 
     // ***** Delete routes *****
@@ -63,6 +81,13 @@
     $app->delete("/delete_store/{id}", function($id) use ($app) { // Delete individual store
         $store = Store::find($id);
         $store->delete();
+
+        return $app->redirect("/");
+    });
+
+    $app->delete("/delete_brand/{id}", function($id) use ($app) { // Delete individual brand
+        $brand = Brand::find($id);
+        $brand->delete();
 
         return $app->redirect("/");
     });

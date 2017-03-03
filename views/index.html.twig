@@ -8,7 +8,7 @@
     <body>
         <div class="container">
             <h1 class="jumbotron">Welcome to the Shoe Shopper</h1>
-            <h4>Here, you can browse various shoe stores in Portland, and see which brands they carry. You can also browse by brand to see what stores carry that brand. Feel free to browse the database or enter a new store or brand.</h4><br>
+            <h4>Here, you can browse various shoe stores in Portland, and see which brands they carry. You can also browse by brand to see what stores carry that brand. Feel free to browse the database or enter a new store or brand. If you would like to add or remove a store from a brand, or vice-versa, click the edit button next to the field you'd like to edit.</h4><br>
 
             <div class="row">
                 <div class="col-sm-4">
@@ -77,12 +77,19 @@
                         <tr>
                             <th>Store</th>
                             <th>Phone Number</th>
+                            <th>View<th>
+                            <th>Delete</th>
                         </tr>
 
                         {% for store in stores %}
                             <tr>
                                 <td>{{ store.getName }}</td>
                                 <td>{{ store.getPhoneNumber }}</td>
+                                <td>
+                                    <form action="/view_store/{{ store.getId}}" method="get">
+                                        <button type="submit" class="btn btn-xs btn-warning">View</button>
+                                    </form>
+                                </td>
                                 <td>
                                     <form action="/delete_store/{{ store.getId}}" method="post">
                                         <input type="hidden" name="_method" value="delete">
@@ -103,11 +110,25 @@
                     <table id="brand_table">
                         <tr>
                             <th>Brand</th>
+                            <th>View<th>
+                            <th>Delete</th>
                         </tr>
 
                         {% for brand in brands %}
                             <tr>
                                 <td>{{ brand.getName }}</td>
+                                <td>
+                                    <form action="/view_brand/{{ brand.getId}}" method="get">
+                                        <button type="submit" class="btn btn-xs btn-warning">View</button>
+                                    </form>
+                                </td>
+                                <td>
+                                    <form action="/delete_brand/{{ brand.getId}}" method="post">
+                                        <input type="hidden" name="_method" value="delete">
+
+                                        <button type="submit" class="btn btn-xs btn-danger">Delete</button>
+                                    </form>
+                                </td>
                             </tr>
                         {% endfor %}
                     </table>
@@ -119,7 +140,7 @@
                     <input type="hidden" name="_method" value="delete">
 
                     <div class="center">
-                        <button type="submit" class="btn btn-sm btn-danger">DELETE DATABASE</button>
+                        <button type="submit" class="btn btn-sm btn-danger">DELETE DATABASE</button><br><br>
                     </div>
                 </form>
             </div>

@@ -91,9 +91,9 @@
 
         // ***** Integration functions
 
-        function addStore($store)
+        function addStore($store_id)
         {
-            $GLOBALS["DB"]->exec("INSERT INTO stores_brands (store_id, brand_id) VALUES ({$store->getId()}, {$this->getId()});");
+            $GLOBALS["DB"]->exec("INSERT INTO stores_brands (store_id, brand_id) VALUES ({$store_id}, {$this->getId()});");
         }
 
         function getStores()

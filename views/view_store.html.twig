@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+        <link href="/css/styles.css" rel="stylesheet" type="text/css">
+        <title>Shoe Shopper | {{ store.getName }}</title>
+    </head>
+    <body>
+        <div class="container">
+            <h1 class="jumbotron">View/Edit {{ store.getName }}</h1>
+            <h4>Here, you can view {{ store.getName }}'s information, including which brands {{ store.getName }} carries.<h4>
+
+            <div class="row">
+                <div class="col-sm-4">
+                    <form action="/view_store/{{ store.getId }}" method="post">
+                        <div class="center">
+                            <h4>Add a Brand</h4><br>
+                        </div>
+
+                        <input name="store_id" type="hidden" value="{{ store.getId }}">
+
+                        <select name="brand_id">
+                            {% for brand in brands %}
+                                <option value="{{ brand.getId }}">{{ brand.getName }}</option>
+                            {% endfor %}
+                        </select><br><br>
+
+                        <div class="center">
+                            <button type="submit" class="btn btn-sm">Add</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="col-sm-4">
+                    <form action="/edit_store/{id}" method="patch">
+                        <input type="hidden" name="_method" value="patch">
+
+                        <div class="center">
+                            <h4>Edit {{ store.getName}}</h4>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="store_name">Name</label>
+                            <input type="text" name="store_name" class="form-control" placeholder="name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone_number">Phone Number</label>
+                            <input type="text" name="phone_number" class="form-control" placeholder="xxx-xxx-xxxx" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="street">Street</label>
+                            <input type="text" name="street" class="form-control" placeholder="street" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="city">City</label>
+                            <input type="text" name="city" class="form-control" placeholder="e.g. 'Portland'" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="state">State</label>
+                            <input type="text" name="state" class="form-control" placeholder="e.g. 'OR'" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="store_name">Zip</label>
+                            <input type="text" name="zip" class="form-control" placeholder="xxxxx" required>
+                        </div>
+
+                        <div class="center">
+                            <button type="submit" class="btn btn-sm">Save</button><br><br>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="col-sm-4">
+                    <div class="center">
+                        <h4>Store Brands</h4>
+                    </div>
+
+                    {% for brand in store_brands %}
+                        <table id="store_table">
+                            <tr>
+                                <th>Brand</th>
+                                <th>View<th>
+                                <th>Delete</th>
+                            </tr>
+
+                            <tr>
+                                <td>{{ brand.getName }}</td>
+                                <td>
+                                    <form action="/view_brand/{{ brand.getId}}" method="get">
+                                        <button type="submit" class="btn btn-xs btn-warning">View</button>
+                                    </form>
+                                </td>
+                                <td>
+                                    <form action="/delete_brand/{{ brand.getId}}" method="post">
+                                        <input type="hidden" name="_method" value="delete">
+
+                                        <button type="submit" class="btn btn-xs btn-danger">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </table>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
