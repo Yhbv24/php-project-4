@@ -83,5 +83,40 @@
             // Assert
             $this->assertEquals([], $result);
         }
+
+        function test_find()
+        {
+            // Arrange
+            $name = "Nike";
+            $new_brand = new Brand($name);
+            $new_brand->save();
+
+            $name2 = "Reebok";
+            $new_brand2 = new Brand($name2);
+            $new_brand2->save();
+
+            // Act
+            $new_brand2_id = $new_brand2->getId();
+            $result = $new_brand2->find($new_brand2_id);
+
+            // Assert
+            $this->assertEquals($new_brand2, $result);
+        }
+
+        function test_update()
+        {
+            // Arrange
+            $name = "Nike";
+            $new_brand = new Brand($name);
+            $new_brand->save();
+
+            // Act
+            $new_name = "Reebok";
+            $new_brand->update($new_name);
+            $result = $new_brand->getName();
+
+            // Assert
+            $this->assertEquals($new_name, $result);
+        }
     }
 ?>
