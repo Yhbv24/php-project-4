@@ -64,5 +64,24 @@
             // Assert
             $this->assertEquals([$new_brand, $new_brand2], $result);
         }
+
+        function test_deleteAll()
+        {
+            // Arrange
+            $name = "Nike";
+            $new_brand = new Brand($name);
+            $new_brand->save();
+
+            $name2 = "Reebok";
+            $new_brand2 = new Brand($name2);
+            $new_brand2->save();
+
+            // Act
+            Brand::deleteAll();
+            $result = Store::getAll();
+
+            // Assert
+            $this->assertEquals([], $result);
+        }
     }
 ?>
