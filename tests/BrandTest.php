@@ -118,5 +118,24 @@
             // Assert
             $this->assertEquals($new_name, $result);
         }
+
+        function test_delete()
+        {
+            // Arrange
+            $name = "Nike";
+            $new_brand = new Brand($name);
+            $new_brand->save();
+
+            $name2 = "Reebok";
+            $new_brand2 = new Brand($name);
+            $new_brand2->save();
+
+            // Act
+            $new_brand2->delete();
+            $result = Brand::getAll();
+
+            // Assert
+            $this->assertEquals($new_brand, $result[0]);
+        }
     }
 ?>
