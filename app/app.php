@@ -60,7 +60,7 @@
         return $app->redirect("/");
     });
 
-    $app->post("/view_store/{id}", function($id) use ($app) {
+    $app->post("/view_store/{id}", function($id) use ($app) { // Add a brand to a store
         $store = Store::find($id);
         $brand_id = $_POST["brand_id"];
         $store->addBrand($brand_id);
@@ -93,6 +93,19 @@
     });
 
     // ***** Patch routes *****
+
+    $app->patch("/edit_store/{id}", function($id) use ($app) {
+        $store = Store::find($id);
+        $name = filter_var($_POST["store_name"], FILTER_SANITIZE_MAGIC_QUOTES);
+        $phone_number = filter_var($_POST["phone_number"], FILTER_SANITIZE_MAGIC_QUOTES);
+        $street = filter_var($_POST["street"], FILTER_SANITIZE_MAGIC_QUOTES);
+        $city = filter_var($_POST["city"], FILTER_SANITIZE_MAGIC_QUOTES);
+        $state = filter_var($_POST["state"], FILTER_SANITIZE_MAGIC_QUOTES);
+        $zip = filter_var($_POST["zip"], FILTER_SANITIZE_MAGIC_QUOTES);
+        $store->update($name, $phone_number, $street, $city, $state, $zip);
+
+        return $app->redirect("/view_store/" . $id);
+    });
 
     return $app;
 ?>
