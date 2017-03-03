@@ -52,36 +52,41 @@
             return $this->zip;
         }
 
+        function getId()
+        {
+            return $this->id;
+        }
+
         // Setters
 
         function setName($new_name)
         {
-            $this->name = $new_name;
+            $this->name = (string) $new_name;
         }
 
         function setPhoneNumber($new_phone_number)
         {
-            $this->phone_number = $new_phone_number;
+            $this->phone_number = (string) $new_phone_number;
         }
 
         function setStreet($new_street)
         {
-            $this->street = $new_street;
+            $this->street = (string) $new_street;
         }
 
         function setCity($new_city)
         {
-            $this->city = $new_city;
+            $this->city = (string) $new_city;
         }
 
         function setState($new_state)
         {
-            $this->state = $new_state;
+            $this->state = (string) $new_state;
         }
 
         function setZip($new_zip)
         {
-            $this->zip = $new_zip;
+            $this->zip = (integer) $new_zip;
         }
 
         // Save, getAll, deleteAll
@@ -97,7 +102,7 @@
             $returned_stores = $GLOBALS["DB"]->query("SELECT * FROM stores;");
             $stores = array();
 
-            foreach($returned_stores as $store) {
+            foreach ($returned_stores as $store) {
                 $name = $store["name"];
                 $phone_number = $store["phone_number"];
                 $street = $store["street"];
@@ -115,6 +120,22 @@
         static function deleteAll()
         {
             $GLOBALS["DB"]->exec("DELETE FROM stores;");
+        }
+
+        static function find($search_id)
+        {
+            $found_store = null;
+            $stores = Store::getAll();
+
+            foreach ($stores as $store) {
+                $store_id = $store->getId();
+
+                if ($store_id == $search_id) {
+                    $found_store = $store;
+                }
+            }
+
+            return $found_store;
         }
     }
 ?>

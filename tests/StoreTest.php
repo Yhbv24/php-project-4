@@ -201,5 +201,34 @@
             // Assert
             $this->assertEquals([], $result);
         }
+
+        function test_find()
+        {
+            // Arrange
+            $name = "Foot Locker";
+            $phone_number = "503-493-7148";
+            $street = "1022 Lloyd Center Space H-204";
+            $city = "Portland";
+            $state = "OR";
+            $zip = 97232;
+            $new_store = new Store($name, $phone_number, $street, $city, $state, $zip);
+            $new_store->save();
+
+            $name2 = "The Shoe Store";
+            $phone_number2 = "971-271-8926";
+            $street2 = "1603 NE Alberta St";
+            $city2 = "Portland";
+            $state2 = "OR";
+            $zip2 = 97211;
+            $new_store2 = new Store($name2, $phone_number2, $street2, $city2, $state2, $zip2);
+            $new_store2->save();
+
+            // Act
+            $store_id = $new_store2->getId();
+            $result = Store::find($store_id);
+
+            // Assert
+            $this->assertEquals($new_store2, $result);
+        }
     }
 ?>
