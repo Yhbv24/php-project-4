@@ -254,5 +254,25 @@
             // Assert
             $this->assertEquals($new_street, $result);
         }
+
+        function test_delete()
+        {
+            // Arrange
+            $name = "Foot Locker";
+            $phone_number = "503-493-7148";
+            $street = "1022 Lloyd Center Space H-204";
+            $city = "Portland";
+            $state = "OR";
+            $zip = 97232;
+            $new_store = new Store($name, $phone_number, $street, $city, $state, $zip);
+            $new_store->save();
+
+            // Act
+            $new_store->delete();
+            $result = Store::getAll();
+
+            // Assert
+            $this->assertEquals([], $result);
+        }
     }
 ?>

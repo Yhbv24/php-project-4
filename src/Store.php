@@ -130,6 +130,11 @@
             }
         }
 
+        function delete()
+        {
+            $GLOBALS["DB"]->exec("DELETE FROM stores WHERE id = {$this->getId()};");
+        }
+
         // Static functions
 
         static function getAll()
