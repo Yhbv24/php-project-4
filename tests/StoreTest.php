@@ -28,7 +28,7 @@
             $result = $new_store->getName();
 
             // Assert
-            $this->assertEquals("Foot Locker", $result);
+            $this->assertEquals($name, $result);
         }
 
         function test_getPhoneNumber()
@@ -46,7 +46,7 @@
             $result = $new_store->getPhoneNumber();
 
             // Assert
-            $this->assertEquals("123-456-7890", $result);
+            $this->assertEquals($phone_number, $result);
         }
     }
 ?>

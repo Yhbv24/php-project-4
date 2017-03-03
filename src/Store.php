@@ -29,7 +29,7 @@
 
         function getPhoneNumber()
         {
-
+            return $this->phone_number;
         }
     }
 ?>
