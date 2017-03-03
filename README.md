@@ -54,7 +54,6 @@ To run this web app, please follow the instructions below.
 | 9. Add basic site UI, with options to add stores and brands. | Store information/brand information. | Be able to save the store/brand and return it when necessary. |
 | 10. Add routing so that a user can update or delete a store/brand. | Store/brand information. | Be able to update/delete the store/brand and have it update the database. |
 
-
 ## SQL Commands
 
 * To set up database:
@@ -65,7 +64,7 @@ To run this web app, please follow the instructions below.
    * CREATE TABLE stores_brands (id serial PRIMARY KEY, store_id INT, shoe_id INT);
 
 ## Known Bugs
-* No known bugs
+* Tables are not displaying properly, but all functionality works
 
 ## License
 * MIT

@@ -290,11 +290,12 @@
             $new_store->save();
 
             $brand_name = "Nike";
-            $new_brand = new Brand($brand_name);
+            $new_brand = new Brand($brand);
             $new_brand->save();
+            $brand_id = $new_brand->getId();
 
             // Act
-            $new_store->addBrand($new_brand);
+            $new_store->addBrand($brand_id);
             $result = $new_store->getBrands();
 
             // Assert
@@ -316,14 +317,16 @@
             $brand_name = "Nike";
             $new_brand = new Brand($brand_name);
             $new_brand->save();
+            $brand_id = $new_brand->getId();
 
             $brand_name2 = "Reebok";
             $new_brand2 = new Brand($brand_name2);
             $new_brand2->save();
+            $brand_id2 = $new_brand2->getId();
 
             // Act
-            $new_store->addBrand($new_brand);
-            $new_store->addBrand($new_brand2);
+            $new_store->addBrand($brand_id);
+            $new_store->addBrand($brand_id2);
             $result = $new_store->getBrands();
 
             // Assert

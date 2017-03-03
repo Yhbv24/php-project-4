@@ -73,15 +73,17 @@
                         <h4>List of Stores</h4>
                     </div>
 
-                    <table id="store_table">
-                        <tr>
-                            <th>Store</th>
-                            <th>Phone Number</th>
-                            <th>View<th>
-                            <th>Delete</th>
-                        </tr>
-
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Store</th>
+                                <th>Number</th>
+                                <th>View<th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
                         {% for store in stores %}
+                        <tbody class="table-striped">
                             <tr>
                                 <td>{{ store.getName }}</td>
                                 <td>{{ store.getPhoneNumber }}</td>
@@ -93,11 +95,11 @@
                                 <td>
                                     <form action="/delete_store/{{ store.getId}}" method="post">
                                         <input type="hidden" name="_method" value="delete">
-
                                         <button type="submit" class="btn btn-xs btn-danger">Delete</button>
                                     </form>
                                 </td>
                             </tr>
+                        </tbody>
                         {% endfor %}
                     </table>
                 </div>
@@ -107,14 +109,16 @@
                         <h4>List of Brands</h4>
                     </div>
 
-                    <table id="brand_table">
-                        <tr>
-                            <th>Brand</th>
-                            <th>View<th>
-                            <th>Delete</th>
-                        </tr>
-
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Brand</th>
+                                <th>View<th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
                         {% for brand in brands %}
+                        <tbody>
                             <tr>
                                 <td>{{ brand.getName }}</td>
                                 <td>
@@ -125,11 +129,11 @@
                                 <td>
                                     <form action="/delete_brand/{{ brand.getId}}" method="post">
                                         <input type="hidden" name="_method" value="delete">
-
                                         <button type="submit" class="btn btn-xs btn-danger">Delete</button>
                                     </form>
                                 </td>
                             </tr>
+                        </tbody>
                         {% endfor %}
                     </table>
                 </div>

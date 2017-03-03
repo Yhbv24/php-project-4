@@ -140,7 +140,7 @@
 
         static function getAll()
         {
-            $returned_stores = $GLOBALS["DB"]->query("SELECT * FROM stores;");
+            $returned_stores = $GLOBALS["DB"]->query("SELECT * FROM stores ORDER BY name;");
             $stores = array();
 
             foreach ($returned_stores as $store) {

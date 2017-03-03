@@ -8,7 +8,13 @@
     <body>
         <div class="container">
             <h1 class="jumbotron">View/Edit {{ store.getName }}</h1>
-            <h4>Here, you can view {{ store.getName }}'s information, including which brands {{ store.getName }} carries.<h4>
+            <h4>Here, you can view {{ store.getName }}'s information, including which brands {{ store.getName }} carries.</h4>
+
+            <div class="center">
+                <h3>{{ store.getName }}</h3>
+                <h4>{{ store.getPhoneNumber }}</h4>
+                <h4>{{ store.getStreet }}, {{ store.getCity }}, {{ store.getState }}, {{ store.getZip }}</h4>
+            </div>
 
             <div class="row">
                 <div class="col-sm-4">
@@ -80,20 +86,37 @@
                         <h4>Store Brands</h4>
                     </div>
 
-                    {% for brand in store_brands %}
-                        <div class="center">
-                            <h4>{{ brand.getName }}</h4>
-                        </div>
-                    {% endfor %}
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Brand</th>
+                                <th>View</th>
+                            </tr>
+                        </thead>
+                        {% for brand in store_brands %}
+                            <tbody>
+                                <tr>
+                                    <td>{{ brand.getName }}</td>
+                                    <td>
+                                        <form action="/view_brand/{{ brand.getId }}" method="get">
+                                            <button type="submit" class="btn btn-sm btn-warning">View</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        {% endfor %}
+                    </table>
                 </div>
             </div>
 
             <div class="row">
-                <form action="/" method="get">
-                    <div class="center">
-                        <button type="submit" class="btn btn-sm">Home</button>
-                    </div>
-                </form>
+                <div class="col-sm-12">
+                    <form action="/" method="get">
+                        <div class="center">
+                            <button type="submit" class="btn btn-sm">Home</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </body>

@@ -11,8 +11,6 @@
     $password = "root";
     $DB = new PDO($server, $username, $password);
 
-     $app['debug'] = true;
-
     use Symfony\Component\HttpFoundation\Request;
     Request::enableHttpMethodParameterOverride();
 
@@ -37,9 +35,17 @@
         return $app["twig"]->render("view_store.html.twig", array("store" => $store, "brands" => $brands, "store_brands" => $store_brands));
     });
 
+    $app->get("/view_brand/{id}", function($id) use ($app) { // Route to the individual brand information
+        $brand = Brand::find($id);
+        $stores = Store::getAll();
+        $store_brands = $brand->getStores();
+
+        return $app["twig"]->render("view_brand.html.twig", array("stores" => $stores, "brand" => $brand, "store_brands" => $store_brands));
+    });
+
     // ***** Post routes *****
 
-    $app->post("/add_store", function() use ($app) { // Add a store
+    $app->post("/add_store", function() use ($app) { // Add a store to table
         $name = filter_var($_POST["store_name"], FILTER_SANITIZE_MAGIC_QUOTES);
         $phone_number = filter_var($_POST["phone_number"], FILTER_SANITIZE_MAGIC_QUOTES);
         $street = filter_var($_POST["street"], FILTER_SANITIZE_MAGIC_QUOTES);
@@ -68,6 +74,14 @@
         return $app->redirect("/view_store/" . $id);
     });
 
+    $app->post("/view_brand/{id}", function($id) use ($app) { // Add a store to a brand
+        $brand = Brand::find($id);
+        $store_id = $_POST["store_id"];
+        $brand->addStore($store_id);
+
+        return $app->redirect("/view_brand/" . $id);
+    });
+
     // ***** Delete routes *****
 
     $app->delete("/delete_all", function() use ($app) { // Delete all information from database
@@ -94,7 +108,7 @@
 
     // ***** Patch routes *****
 
-    $app->patch("/edit_store/{id}", function($id) use ($app) {
+    $app->patch("/edit_store/{id}", function($id) use ($app) { // Edit store's information
         $store = Store::find($id);
         $name = filter_var($_POST["store_name"], FILTER_SANITIZE_MAGIC_QUOTES);
         $phone_number = filter_var($_POST["phone_number"], FILTER_SANITIZE_MAGIC_QUOTES);
@@ -105,6 +119,14 @@
         $store->update($name, $phone_number, $street, $city, $state, $zip);
 
         return $app->redirect("/view_store/" . $id);
+    });
+
+    $app->patch("/edit_brand/{id}", function($id) use ($app) { // Edit brand's information
+        $brand = Brand::find($id);
+        $name = filter_var($_POST["brand_name"], FILTER_SANITIZE_MAGIC_QUOTES);
+        $brand->update($name);
+
+        return $app->redirect("/view_brand/" . $id);
     });
 
     return $app;

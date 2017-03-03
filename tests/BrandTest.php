@@ -153,9 +153,10 @@
             $zip = 97232;
             $store = new Store($name, $phone_number, $street, $city, $state, $zip);
             $store->save();
+            $store_id = $store->getId();
 
             // Act
-            $new_brand->addStore($store);
+            $new_brand->addStore($store_id);
             $result = $new_brand->getStores();
 
             // Assert
@@ -177,6 +178,7 @@
             $zip = 97232;
             $store = new Store($name, $phone_number, $street, $city, $state, $zip);
             $store->save();
+            $store_id = $store->getId();
 
             $store_name2 = "The Shoe Store";
             $phone_number2 = "971-271-8926";
@@ -186,10 +188,11 @@
             $zip2 = 97211;
             $store2 = new Store($name, $phone_number, $street, $city, $state, $zip);
             $store2->save();
+            $store_id2 = $store2->getId();
 
             // Act
-            $new_brand->addStore($store);
-            $new_brand->addStore($store2);
+            $new_brand->addStore($store_id);
+            $new_brand->addStore($store_id2);
             $result = $new_brand->getStores();
 
             // Assert
