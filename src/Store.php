@@ -20,7 +20,7 @@
             $this->id = $id;
         }
 
-        // Getters
+        // ***** Getters *****
 
         function getName()
         {
@@ -57,7 +57,7 @@
             return $this->id;
         }
 
-        // Setters
+        // ***** Setters *****
 
         function setName($new_name)
         {
@@ -89,7 +89,7 @@
             $this->zip = (integer) $new_zip;
         }
 
-        // Save, update, delete
+        // ***** CRUD functions *****
 
         function save()
         {
@@ -133,9 +133,10 @@
         function delete()
         {
             $GLOBALS["DB"]->exec("DELETE FROM stores WHERE id = {$this->getId()};");
+            $GLOBALS["DB"]->exec("DELETE FROM stores_brands WHERE store_id = {$this->getId()};");
         }
 
-        // Static functions
+        // ***** Static functions *****
 
         static function getAll()
         {
@@ -176,6 +177,31 @@
             }
 
             return $found_store;
+        }
+
+        // ***** Integration functions *****
+
+        function addBrand($brand)
+        {
+            $GLOBALS["DB"]->exec("INSERT INTO stores_brands (store_id, brand_id) VALUES ({$this->getId()}, {$brand->getId()});");
+        }
+
+        function getBrands()
+        {
+            $returned_brands = $GLOBALS["DB"]->query("SELECT brands.* FROM stores
+                JOIN stores_brands ON (stores_brands.store_id = stores.id)
+                JOIN brands ON (brands.id = stores_brands.brand_id)
+                WHERE stores.id = {$this->getId()};");
+            $brands = array();
+
+            foreach ($returned_brands as $brand) {
+                $name = $brand["name"];
+                $id = $brand["id"];
+                $brand = new Brand($name, $id);
+                array_push($brands, $brand);
+            }
+
+            return $brands;
         }
     }
 ?>

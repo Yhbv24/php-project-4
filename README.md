@@ -39,17 +39,21 @@ To run this web app, please follow the instructions below.
 1. Create files and folders necessary for the web app.
 2. Install required dependencies.
 3. Create databases for stores, brands, and the join table to connect them.
-4. Create Store and Brand objects, with required constructors for each.
-   * Store constructor: name, phone_number, street, city, state, zip, id.
-   * Brand constructor: name, id.
-5. Create methods to add, change, and delete both stores and brands.
-6. Allow owner to sort brands into stores, and stores into brands.
+4. Begin writing tests and methods for classes.
 
 |     Spec     |     Input     |     Output     |
 | ------------ | ------------- | -------------- |
-| 1. Add getters and setters for Store. | Get and set name, phone number, street, city, state, zip of store. | Return information about store. |
-| 2. Add CRUD methods to Store. | Create, read, update, and delete stores | Display updated/new information about the stores. |
-| 3. Add getters and setters for Brand. | N/A | N/A |
+| 1. Add constructor for Store class. | Name, phone number, street, city, state, zip, ID. | Output should ultimately save new instantiation of a new Store. |
+| 2. Add getters and setters for Store. | Get and set name, phone number, street, city, state, zip of store. | Return information about store. |
+| 3. Add CRUD methods to Store. | Create, read, update, and delete stores | Display updated/new information about the stores. |
+| 4. Pass all non-integrated tests | Run tests. | Pass tests. |
+| 5. Add constructor for Brand class. | Name, ID. | Output should ultimately save new instantiation of a new Brand. |
+| 6. Add getters and setters for Brand. | N/A | N/A |
+| 7. Add CRUD methods to Brand. | Create, read, update, and delete brands | Display updated/new information about the brands. |
+| 8. Pass all tests for Store and Brand | Run all tests. | Pass all tests. |
+| 9. Add basic site UI, with options to add stores and brands. | Store information/brand information. | Be able to save the store/brand and return it when necessary. |
+| 10. Add routing so that a user can update or delete a store/brand. | Store/brand information. | Be able to update/delete the store/brand and have it update the database. |
+
 
 ## SQL Commands
 
