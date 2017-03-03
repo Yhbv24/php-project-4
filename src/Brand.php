@@ -98,10 +98,10 @@
 
         function getStores()
         {
-            $returned_stores = $GLOBALS["DB"]->query("SELECT brands.* FROM stores
-                JOIN stores_brands ON (stores_brands.store_id = stores.id)
-                JOIN brands ON (brands.id = stores_brands.brand_id)
-                WHERE stores.id = {$this->getId()};");
+            $returned_stores = $GLOBALS["DB"]->query("SELECT stores.* FROM brands
+                JOIN stores_brands ON (stores_brands.brand_id = brands.id)
+                JOIN stores ON (stores.id = stores_brands.store_id)
+                WHERE brands.id = {$this->getId()};");
             $stores = array();
 
             foreach ($returned_stores as $store) {
