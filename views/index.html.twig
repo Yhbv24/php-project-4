@@ -8,9 +8,121 @@
     <body>
         <div class="container">
             <h1 class="jumbotron">Welcome to the Shoe Shopper</h1>
-            <h4>Here, you can browse various shoe stores in Portland, and see which brands they carry. You can also browse by brand to see what stores carry that brand. Feel free to browse the database or enter a new store or brand.</h4>
+            <h4>Here, you can browse various shoe stores in Portland, and see which brands they carry. You can also browse by brand to see what stores carry that brand. Feel free to browse the database or enter a new store or brand.</h4><br>
 
-            
+            <div class="row">
+                <div class="col-sm-4">
+                    <form action="/add_store" method="post">
+                        <div class="center">
+                            <h4>Add a Store</h4>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="store_name">Name</label>
+                            <input type="text" name="store_name" class="form-control" placeholder="add a store" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone_number">Phone Number</label>
+                            <input type="text" name="phone_number" class="form-control" placeholder="xxx-xxx-xxxx" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="street">Street</label>
+                            <input type="text" name="street" class="form-control" placeholder="street" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="city">City</label>
+                            <input type="text" name="city" class="form-control" placeholder="e.g. 'Portland'" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="state">State</label>
+                            <input type="text" name="state" class="form-control" placeholder="e.g. 'OR'" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="store_name">Zip</label>
+                            <input type="text" name="zip" class="form-control" placeholder="xxxxx" required>
+                        </div>
+
+                        <div class="center">
+                            <button type="submit" class="btn btn-sm">Add Store</button><br><br>
+                        </div>
+                    </form>
+
+                    <form action="/add_brand" method="post">
+                        <div class="center">
+                            <h4>Add a Brand</h4>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="brand_name">Name</label>
+                            <input type="text" name="brand_name" class="form-control" placeholder="e.g. 'Nike'" required>
+                        </div>
+
+                        <div class="center">
+                            <button type="submit" class="btn btn-sm">Add Brand</button><br><br>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="col-sm-4">
+                    <div class="center">
+                        <h4>List of Stores</h4>
+                    </div>
+
+                    <table id="store_table">
+                        <tr>
+                            <th>Store</th>
+                            <th>Phone Number</th>
+                        </tr>
+
+                        {% for store in stores %}
+                            <tr>
+                                <td>{{ store.getName }}</td>
+                                <td>{{ store.getPhoneNumber }}</td>
+                                <td>
+                                    <form action="/delete_store/{{ store.getId}}" method="post">
+                                        <input type="hidden" name="_method" value="delete">
+
+                                        <button type="submit" class="btn btn-xs btn-danger">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+
+                <div class="col-sm-4">
+                    <div class="center">
+                        <h4>List of Brands</h4>
+                    </div>
+
+                    <table id="brand_table">
+                        <tr>
+                            <th>Brand</th>
+                        </tr>
+
+                        {% for brand in brands %}
+                            <tr>
+                                <td>{{ brand.getName }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+
+            <div class="row">
+                <form action="/delete_all" method="post">
+                    <input type="hidden" name="_method" value="delete">
+
+                    <div class="center">
+                        <button type="submit" class="btn btn-sm btn-danger">DELETE DATABASE</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </body>
 </html>
