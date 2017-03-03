@@ -89,13 +89,48 @@
             $this->zip = (integer) $new_zip;
         }
 
-        // Save, getAll, deleteAll
+        // Save, update, delete
 
         function save()
         {
             $GLOBALS["DB"]->exec("INSERT INTO stores (name, phone_number, street, city, state, zip) VALUES ('{$this->getName()}', '{$this->getPhoneNumber()}', '{$this->getStreet()}', '{$this->getCity()}', '{$this->getState()}', {$this->getZip()});");
             $this->id = $GLOBALS["DB"]->lastInsertId();
         }
+
+        function update($new_name, $new_phone_number, $new_street, $new_city, $new_state, $new_zip)
+        {
+            if ($new_name) {
+                $GLOBALS["DB"]->exec("UPDATE stores SET name = '{$new_name}' WHERE id = {$this->getId()};");
+                $this->setName($new_name);
+            }
+
+            if ($new_phone_number) {
+                $GLOBALS["DB"]->exec("UPDATE stores SET phone_number = '{$new_phone_number}' WHERE id = {$this->getId()};");
+                $this->setPhoneNumber($new_phone_number);
+            }
+
+            if ($new_street) {
+                $GLOBALS["DB"]->exec("UPDATE stores SET street = '{$new_street}' WHERE id = {$this->getId()};");
+                $this->setStreet($new_street);
+            }
+
+            if ($new_city) {
+                $GLOBALS["DB"]->exec("UPDATE stores SET city = '{$new_city}' WHERE id = {$this->getId()};");
+                $this->setCity($new_city);
+            }
+
+            if ($new_state) {
+                $GLOBALS["DB"]->exec("UPDATE stores SET state = '{$new_state}' WHERE id = {$this->getId()};");
+                $this->setState($new_state);
+            }
+
+            if ($new_zip) {
+                $GLOBALS["DB"]->exec("UPDATE stores SET zip = {$new_zip} WHERE id = {$this->getId()};");
+                $this->setZip($new_zip);
+            }
+        }
+
+        // Static functions
 
         static function getAll()
         {
