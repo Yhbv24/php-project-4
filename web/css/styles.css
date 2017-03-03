@@ -1,3 +1,12 @@
-.center {
+.center { /* Centers anything with the center div */
     text-align: center;
+}
+
+#main-text { /* Text on the index.html.twig page */
+    line-height: 1.4em;
+    text-align: center;
+}
+
+#move-right { /* This moves a table column farther to the right */
+    padding-left: 150px;
 }

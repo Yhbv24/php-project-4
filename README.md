@@ -64,7 +64,7 @@ To run this web app, please follow the instructions below.
    * CREATE TABLE stores_brands (id serial PRIMARY KEY, store_id INT, shoe_id INT);
 
 ## Known Bugs
-* Tables are not displaying properly, but all functionality works
+* No known bugs
 
 ## License
 * MIT

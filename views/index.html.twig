@@ -8,7 +8,7 @@
     <body>
         <div class="container">
             <h1 class="jumbotron">Welcome to the Shoe Shopper</h1>
-            <h4>Here, you can browse various shoe stores in Portland, and see which brands they carry. You can also browse by brand to see what stores carry that brand. Feel free to browse the database or enter a new store or brand. If you would like to add or remove a store from a brand, or vice-versa, click the edit button next to the field you'd like to edit.</h4><br>
+            <h4 id="main-text">Here, you can browse various shoe stores in Portland, and see which brands they carry. You can also browse by brand to see what stores carry that brand. Feel free to browse the database or enter a new store or brand. If you would like to add or remove a store from a brand, or vice-versa, click the edit button next to the field you'd like to edit.</h4><br>
 
             <div class="row">
                 <div class="col-sm-4">
@@ -73,17 +73,17 @@
                         <h4>List of Stores</h4>
                     </div>
 
-                    <table class="table table-striped">
+                    <table class="table table-hover">
                         <thead>
                             <tr>
                                 <th>Store</th>
                                 <th>Number</th>
-                                <th>View<th>
+                                <th>View</th>
                                 <th>Delete</th>
                             </tr>
                         </thead>
                         {% for store in stores %}
-                        <tbody class="table-striped">
+                        <tbody>
                             <tr>
                                 <td>{{ store.getName }}</td>
                                 <td>{{ store.getPhoneNumber }}</td>
@@ -109,11 +109,11 @@
                         <h4>List of Brands</h4>
                     </div>
 
-                    <table class="table table-striped">
+                    <table class="table table-hover">
                         <thead>
                             <tr>
                                 <th>Brand</th>
-                                <th>View<th>
+                                <th>View</th>
                                 <th>Delete</th>
                             </tr>
                         </thead>
