@@ -20,9 +20,16 @@
             $this->id = $id;
         }
 
+        // Getters
+
         function getName()
         {
             return $this->name;
+        }
+
+        function getPhoneNumber()
+        {
+
         }
     }
 ?>
