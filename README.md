@@ -20,7 +20,7 @@ The user will be able to view all of the brands a store carries, and all of the 
 
 To run this web app, please follow the instructions below.
 
-1. Clone the repository to your computer at (https://github.com/Yhbv24/php-project-3).
+1. Clone the repository to your computer at (https://github.com/Yhbv24/php-project-4).
 2. Use Composer to install the Twig, Silex, and PHPUnit dependencies. You can read more here: (https://getcomposer.org/).
    * For Silex instructions: (http://silex.sensiolabs.org/).
    * For Twig instructions: (http://twig.sensiolabs.org/).
