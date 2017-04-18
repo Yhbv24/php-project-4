@@ -1,11 +1,11 @@
-# Shoe Store Brand Record Keeper
+# Shoe Store & Brand Record Keeper
 #### By Ash Laidlaw
 
 ## Description/Goals
 
-The goal of this project is to build a web app which makes use of a SQL database via MAMP, which can be manipulated via PHP. The project is a database which has a collection of local shoe stores and shoe brands. You can add a brand to a store, and you can add a store to a brand.
+This project makes use of various technologies to allow a user to add/remove/edit shoe stores and shoe brands. It makes use of MAMP, and has a persistent, many-to-many database using a shoe store table, and shoe brand table, and a join table.
 
-The user will be able to view all of the brands a store carries, and all of the stores by which brands are sold. The project will make use of three tables; a store table, a brand table, and a join table that connects the brands to the stores.
+A user should be able to navigate the site to see information about stores, brands, and where to find brands that a user would like to purchase.
 
 ## Technologies Used
 * PHP
